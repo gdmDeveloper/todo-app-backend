@@ -21,7 +21,7 @@ app.use(
   }),
 );
 
-app.use('/auth/', authRouter);
+app.use('/auth', authRouter);
 
 app.use(validateToken);
 
