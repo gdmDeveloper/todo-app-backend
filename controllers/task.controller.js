@@ -21,7 +21,7 @@ const getTasks = async (req, res) => {
   const tasks = await Task.find({
     user: req.user.id,
     $or: [{ group: { $exists: false } }, { group: null }],
-  });
+  }).sort({ createdAt: -1 });
   res.json({ total: tasks.length, tasks });
 };
 
