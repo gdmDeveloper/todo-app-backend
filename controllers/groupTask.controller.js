@@ -10,6 +10,7 @@ const createGroupTask = async (req, res) => {
   res.status(201).json({ message: 'Task created', task });
 };
 
+// Ordenados
 const getGroupTasks = async (req, res) => {
   const tasks = await Task.find({
     group: req.group._id,
