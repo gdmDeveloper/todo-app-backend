@@ -10,18 +10,16 @@ import Task from '../models/Task.js';
 
 const getTasks = async (req, res) => {
   const { completed, priority, search } = req.query;
-  const filter = { user: req.user.id }; // from payload
-
-  if (completed !== undefined) filter.completed = completed === 'true';
-
-  if (priority) filter.priority = priority;
-
-  if (search) filter.title = { $regex: search, $options: 'i' };
-
-  const tasks = await Task.find({
+  const filter = {
     user: req.user.id,
     $or: [{ group: { $exists: false } }, { group: null }],
-  }).sort({ createdAt: -1 });
+  };
+
+  if (completed !== undefined) filter.completed = completed === 'true';
+  if (priority) filter.priority = priority;
+  if (search) filter.title = { $regex: search, $options: 'i' };
+
+  const tasks = await Task.find(filter).sort({ createdAt: -1 });
   res.json({ total: tasks.length, tasks });
 };
 
