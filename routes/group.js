@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createGroup,
+  deleteGroup,
   editGroup,
   getGroupById,
   getUserGroups,
@@ -23,5 +24,6 @@ router.post('/', schemaValidatorMiddleware(createGroupSchema), createGroup); // 
 router.get('/search', schemaValidatorMiddleware(searchGroupSchema, 'query'), searchGroup); // Search group. Doesn't join on query, needs user confirmation.
 router.post('/join', schemaValidatorMiddleware(joinGroupSchema), joinGroup); // Join group. Sends groupId.
 router.patch('/edit/:id', schemaValidatorMiddleware(editGroupSchema), editGroup); // Edits group information. Group admin can give admin permissions to members.
+router.delete('/:id', deleteGroup); // Edits group information. Group admin can give admin permissions to members.
 
 export default router;

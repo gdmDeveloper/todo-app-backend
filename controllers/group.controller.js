@@ -101,4 +101,9 @@ const editGroup = async (req, res) => {
   res.status(200).json({ message: 'Group updated', group: groupUpdated });
 };
 
-export { createGroup, searchGroup, getGroupById, joinGroup, getUserGroups, editGroup };
+const deleteGroup = async (req, res) => {
+  const { id } = req.params;
+  const group = await Group.findByIdAndDelete(id);
+  res.status(200).json({ message: 'Group deleted' });
+};
+export { createGroup, searchGroup, getGroupById, joinGroup, getUserGroups, editGroup, deleteGroup };
