@@ -11,7 +11,7 @@ const getUserGroups = async (req, res) => {
 
 // ****** CREATE GROUP *********
 const createGroup = async (req, res) => {
-  const { name, description = '' } = req.body;
+  const { name, description = '', coverImage = null } = req.body;
 
   // Generate crypto code for group invitation
 
@@ -20,6 +20,7 @@ const createGroup = async (req, res) => {
   const group = await Group.create({
     name,
     description,
+    coverImage,
     invitationCode: groupCode,
     members: [
       {
