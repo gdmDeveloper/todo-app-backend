@@ -62,7 +62,7 @@ const searchGroup = async (req, res) => {
 const getGroupById = async (req, res) => {
   const { id } = req.params;
 
-  const group = await Group.findById(id);
+  const group = await Group.findById(id).select('+invitationCode');
   if (!group) res.status(404).json({ error: 'Group not found' });
 
   res.status(200).json(group);
